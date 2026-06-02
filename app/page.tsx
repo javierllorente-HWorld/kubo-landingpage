@@ -1,5 +1,72 @@
 import Image from "next/image";
 
+const START_FREE_URL = "https://kubo-henna.vercel.app/";
+
+const LATAM_UNIVERSITIES = [
+  "UBA",
+  "UNAM",
+  "USP",
+  "Tec de Monterrey",
+  "PUC Chile",
+  "Uniandes",
+];
+
+const FAQ_ITEMS = [
+  {
+    question: "¿Cómo puede usar Kubo una universidad?",
+    answer:
+      "Kubo permite que docentes creen materias y decks de estudio, mientras la institución puede visualizar avances, métricas generales y hábitos de estudio de los estudiantes.",
+  },
+  {
+    question: "¿Los docentes pueden crear contenido?",
+    answer:
+      "Sí. Los docentes pueden crear materias, organizar decks y cargar cards para que los estudiantes estudien con repetición espaciada.",
+  },
+  {
+    question: "¿Qué métricas puede ver la institución?",
+    answer:
+      "La institución puede ver avances generales, progreso por curso, actividad de estudio, rachas y métricas de uso para entender cómo acompañar mejor a los estudiantes.",
+  },
+  {
+    question: "¿Kubo reemplaza a las clases o al campus virtual?",
+    answer:
+      "No. Kubo complementa la experiencia académica ayudando a los estudiantes a repasar, sostener hábitos y llegar mejor preparados a evaluaciones.",
+  },
+  {
+    question: "¿Se puede usar con distintas materias o carreras?",
+    answer:
+      "Sí. Kubo está pensado para organizar materias, cursos y decks según la estructura académica de cada institución.",
+  },
+  {
+    question: "¿Cómo funciona la demo para instituciones?",
+    answer:
+      "En la demo revisamos las necesidades de tu institución, te mostramos cómo docentes y estudiantes usarían Kubo, y evaluamos qué métricas serían más útiles para el seguimiento académico.",
+  },
+];
+
+function FaqItem({
+  question,
+  answer,
+}: {
+  question: string;
+  answer: string;
+}) {
+  return (
+    <details className="group border-b border-slate-200/70 py-4 last:border-b-0">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-semibold text-[#111827] [&::-webkit-details-marker]:hidden">
+        {question}
+        <span
+          className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#B7FF2A]/25 text-lg font-bold leading-none text-[#111827] transition-transform group-open:rotate-45"
+          aria-hidden="true"
+        >
+          +
+        </span>
+      </summary>
+      <p className="mt-3 text-sm leading-relaxed text-[#98A2B3]">{answer}</p>
+    </details>
+  );
+}
+
 function KuboLogo({
   className = "",
   showText = true,
@@ -28,15 +95,24 @@ function KuboLogo({
 function PrimaryButton({
   children,
   className = "",
+  href,
 }: {
   children: React.ReactNode;
   className?: string;
+  href?: string;
 }) {
+  const classes = `rounded-xl bg-[#B7FF2A] px-6 py-3 font-semibold text-[#111827] transition-opacity hover:opacity-90 ${className}`;
+
+  if (href) {
+    return (
+      <a href={href} className={`inline-flex items-center justify-center ${classes}`}>
+        {children}
+      </a>
+    );
+  }
+
   return (
-    <button
-      type="button"
-      className={`rounded-xl bg-[#B7FF2A] px-6 py-3 font-semibold text-[#111827] transition-opacity hover:opacity-90 ${className}`}
-    >
+    <button type="button" className={classes}>
       {children}
     </button>
   );
@@ -56,6 +132,87 @@ function SecondaryButton({
     >
       {children}
     </button>
+  );
+}
+
+function PricingCard({
+  title,
+  description,
+  price,
+  priceNote,
+  features,
+  buttonLabel,
+  buttonHref,
+  highlighted = false,
+  badge,
+}: {
+  title: string;
+  description: string;
+  price: string;
+  priceNote: string;
+  features: string[];
+  buttonLabel: string;
+  buttonHref?: string;
+  highlighted?: boolean;
+  badge?: string;
+}) {
+  return (
+    <div
+      className={`relative flex h-full flex-col rounded-3xl border bg-white p-6 sm:p-7 ${
+        highlighted
+          ? "border-[#B7FF2A]/70 shadow-[0_8px_32px_rgba(183,255,42,0.14),0_4px_20px_rgba(15,23,42,0.05)]"
+          : "border-slate-200/70 shadow-[0_4px_20px_rgba(15,23,42,0.05)]"
+      }`}
+    >
+      {badge && (
+        <span className="absolute -top-2.5 left-5 rounded-full bg-[#B7FF2A] px-2.5 py-0.5 text-[10px] font-semibold tracking-wide text-[#111827] shadow-[0_4px_14px_rgba(183,255,42,0.35)]">
+          {badge}
+        </span>
+      )}
+      <div className="flex h-[7.25rem] flex-col items-center text-center">
+        <h3 className="text-lg font-bold leading-tight text-[#111827]">
+          {title}
+        </h3>
+        <p className="mt-2 flex-1 text-sm leading-snug text-[#98A2B3]">
+          {description}
+        </p>
+        <div className="w-full shrink-0 pt-1">
+          <p className="text-2xl font-bold leading-none tracking-tight text-[#111827]">
+            {price}
+          </p>
+          <p className="mt-1 h-4 text-xs leading-none text-[#98A2B3]">
+            {priceNote || "\u00A0"}
+          </p>
+        </div>
+      </div>
+      <ul className="mt-6 flex-1 space-y-3 border-t border-slate-200/70 pt-6">
+        {features.map((feature) => (
+          <li key={feature} className="flex items-start gap-2 text-sm leading-snug">
+            <span
+              className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-md bg-[#B7FF2A]/25 text-[10px] font-bold leading-none text-[#111827]"
+              aria-hidden="true"
+            >
+              ✓
+            </span>
+            <span className="text-[#111827]">{feature}</span>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-6 shrink-0">
+        {highlighted ? (
+          <PrimaryButton
+            href={buttonHref}
+            className="w-full py-2 text-sm shadow-[0_4px_14px_rgba(183,255,42,0.35)]"
+          >
+            {buttonLabel}
+          </PrimaryButton>
+        ) : (
+          <SecondaryButton className="w-full py-2 text-sm">
+            {buttonLabel}
+          </SecondaryButton>
+        )}
+      </div>
+    </div>
   );
 }
 
@@ -113,7 +270,7 @@ export default function Home() {
                 href="#caracteristicas"
                 className="text-sm font-medium text-white/90 transition-colors hover:text-[#B7FF2A]"
               >
-                Características
+                Beneficios
               </a>
               <a
                 href="#como-funciona"
@@ -125,21 +282,27 @@ export default function Home() {
                 href="#precios"
                 className="text-sm font-medium text-white/90 transition-colors hover:text-[#B7FF2A]"
               >
-                Precios
+                Planes
+              </a>
+              <a
+                href="#preguntas"
+                className="text-sm font-medium text-white/90 transition-colors hover:text-[#B7FF2A]"
+              >
+                Preguntas
               </a>
             </div>
-            <button
-              type="button"
+            <a
+              href={START_FREE_URL}
               className="shrink-0 rounded-2xl bg-[#B7FF2A] px-6 py-3 text-sm font-semibold text-[#111827] transition-opacity hover:opacity-90"
             >
               Empezar gratis
-            </button>
+            </a>
           </div>
         </nav>
       </header>
 
       <main>
-        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:items-start lg:gap-10 lg:px-8 lg:py-24">
+        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:items-center lg:gap-10 lg:px-8 lg:py-24">
           <div>
             <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
               Estudiá{" "}
@@ -151,7 +314,7 @@ export default function Home() {
               tus objetivos.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <PrimaryButton>Empezar gratis</PrimaryButton>
+              <PrimaryButton href={START_FREE_URL}>Empezar gratis</PrimaryButton>
               <SecondaryButton>Ver demo</SecondaryButton>
             </div>
             <p className="mt-4 flex items-center gap-1 text-sm text-[#98A2B3]">
@@ -159,61 +322,103 @@ export default function Home() {
               Prueba gratis · No se requiere tarjeta
             </p>
           </div>
-          <div className="mt-12 w-full lg:mt-0">
+          <div className="mt-12 flex w-full items-center justify-center bg-[#F5F7FA] px-2 sm:px-4 lg:mt-0 lg:justify-end lg:py-2">
             <Image
-              src="/hero-dashboard.png"
-              alt="Dashboard de Kubo"
+              src="/hero-dashboard 2.png"
+              alt="Dashboard de Kubo en laptop"
               width={1200}
               height={800}
-              className="h-auto w-full rounded-[28px] object-contain shadow-[0_20px_50px_-12px_rgba(17,24,39,0.16)]"
-              sizes="(max-width: 1024px) 100vw, (min-width: 1024px) 58vw"
+              className="h-auto w-full max-h-[380px] max-w-[min(100%,520px)] object-contain mix-blend-multiply sm:max-h-[420px] lg:max-h-[460px] lg:max-w-[580px]"
+              sizes="(max-width: 1024px) 100vw, (min-width: 1024px) 52vw"
               priority
             />
           </div>
         </section>
 
-        <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-3xl font-bold sm:text-4xl">
-              Tu estudio diario, claro y organizado
+              Universidades que usan Kubo
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-[#98A2B3]">
-              Visualizá tu progreso, tus decks y tu sesión diaria en un
-              dashboard simple pensado para crear hábito.
+              Kubo acompaña a universidades líderes de LATAM a mejorar el
+              seguimiento del estudio, potenciar el trabajo docente y fortalecer
+              el aprendizaje de sus estudiantes.
             </p>
           </div>
-          <div className="relative mt-8">
-            <div
-              className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[70%] w-[85%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#B7FF2A] opacity-[0.14] blur-[72px]"
-              aria-hidden="true"
-            />
-            <div className="relative overflow-hidden rounded-[32px] border border-slate-200/70 bg-white p-3 shadow-[0_24px_80px_rgba(15,23,42,0.10)] sm:p-4">
-              <Image
-                src="/hero-dashboard.png"
-                alt="Dashboard de Kubo con progreso, decks y sesión diaria"
-                width={1200}
-                height={800}
-                className="mx-auto h-auto w-full max-w-full object-contain"
-                sizes="(max-width: 1280px) 100vw, 1152px"
-              />
-            </div>
+          <div className="mt-12 grid grid-cols-2 items-center gap-x-10 gap-y-12 lg:mt-14 lg:flex lg:items-center lg:justify-between lg:gap-x-12">
+            {LATAM_UNIVERSITIES.map((name) => (
+              <p
+                key={name}
+                className="text-center text-xl font-bold tracking-wide text-[#111827]/60 lg:text-2xl"
+              >
+                {name}
+              </p>
+            ))}
           </div>
-          <div className="mt-6 grid gap-4 sm:grid-cols-3">
-            <div className="rounded-2xl border border-slate-200/70 bg-white px-6 py-6 text-center shadow-[0_8px_30px_rgba(15,23,42,0.06)]">
-              <p className="text-3xl font-bold text-[#111827]">56</p>
-              <p className="mt-1 text-sm font-medium text-[#111827]">
-                días de racha
-              </p>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+          <div className="rounded-[32px] border border-slate-200/70 bg-white p-5 shadow-[0_8px_32px_rgba(15,23,42,0.06)] sm:p-6">
+            <h3 className="text-center text-xl font-semibold text-[#111827] sm:text-2xl">
+              Impacto de Kubo
+            </h3>
+            <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="rounded-xl border border-slate-200/60 bg-[#FAFBFC] px-3 py-3.5 text-center">
+                <p className="text-2xl font-bold text-[#111827]">+20k</p>
+                <p className="mt-0.5 text-xs text-[#98A2B3]">estudiantes</p>
+              </div>
+              <div className="rounded-xl border border-slate-200/60 bg-[#FAFBFC] px-3 py-3.5 text-center">
+                <p className="text-2xl font-bold text-[#111827]">93%</p>
+                <p className="mt-0.5 text-xs text-[#98A2B3]">
+                  mejora en la nota
+                </p>
+              </div>
+              <div className="rounded-xl border border-slate-200/60 bg-[#FAFBFC] px-3 py-3.5 text-center">
+                <p className="text-2xl font-bold text-[#111827]">+1.2M</p>
+                <p className="mt-0.5 text-xs text-[#98A2B3]">cards estudiadas</p>
+              </div>
+              <div className="rounded-xl border border-slate-200/60 bg-[#FAFBFC] px-3 py-3.5 text-center">
+                <p className="text-2xl font-bold text-[#111827]">4.8/5</p>
+                <p className="mt-0.5 text-xs text-[#98A2B3]">
+                  satisfacción promedio
+                </p>
+              </div>
             </div>
-            <div className="rounded-2xl border border-slate-200/70 bg-white px-6 py-6 text-center shadow-[0_8px_30px_rgba(15,23,42,0.06)]">
-              <p className="text-3xl font-bold text-[#111827]">31/50</p>
-              <p className="mt-1 text-sm font-medium text-[#111827]">
-                cards estudiadas
-              </p>
-            </div>
-            <div className="rounded-2xl border border-slate-200/70 bg-white px-6 py-6 text-center shadow-[0_8px_30px_rgba(15,23,42,0.06)]">
-              <p className="text-3xl font-bold text-[#111827]">Progreso</p>
-              <p className="mt-1 text-sm font-medium text-[#111827]">por deck</p>
+            <p className="mt-5 text-center text-base text-[#98A2B3]">
+              Lo que mejora tu forma de estudiar
+            </p>
+            <div className="mt-5 grid gap-3 lg:grid-cols-2">
+              <div className="rounded-xl border border-slate-200/60 bg-[#FAFBFC] p-4">
+                <p
+                  className="text-sm tracking-wide text-[#FBBC04]"
+                  aria-hidden="true"
+                >
+                  ★★★★★
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-[#111827]">
+                  &ldquo;Ahora sé exactamente qué repasar cada día sin perder
+                  tiempo organizándome.&rdquo;
+                </p>
+                <p className="mt-3 text-xs font-medium text-[#98A2B3]">
+                  Andrés · Estudiante
+                </p>
+              </div>
+              <div className="rounded-xl border border-slate-200/60 bg-[#FAFBFC] p-4">
+                <p
+                  className="text-sm tracking-wide text-[#FBBC04]"
+                  aria-hidden="true"
+                >
+                  ★★★★★
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-[#111827]">
+                  &ldquo;Las rachas y el progreso por deck me ayudan a mantener
+                  constancia y llegar mejor a los parciales.&rdquo;
+                </p>
+                <p className="mt-3 text-xs font-medium text-[#98A2B3]">
+                  Lucía · Estudiante
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -305,8 +510,95 @@ export default function Home() {
 
         <section
           id="precios"
-          className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8"
+          className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8 lg:py-12"
         >
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-3xl font-bold sm:text-4xl">
+              Elegí el plan ideal para estudiar mejor
+            </h2>
+          </div>
+          <div className="mt-6 grid gap-5 lg:grid-cols-3 lg:items-stretch lg:gap-8">
+            <PricingCard
+              title="Básico"
+              description="Para empezar a estudiar con Kubo."
+              price="Gratis"
+              priceNote="x 3 meses"
+              features={[
+                "Materias y decks",
+                "Flashcards con repetición espaciada",
+                "Racha diaria",
+                "Progreso por deck",
+                "Sesión diaria de estudio",
+              ]}
+              buttonLabel="Empezar gratis"
+              buttonHref={START_FREE_URL}
+              highlighted
+              badge="Más elegido"
+            />
+            <PricingCard
+              title="Pro"
+              description="Para estudiar con más seguimiento."
+              price="US$5"
+              priceNote="/ mes"
+              features={[
+                "Todo lo del plan Estudiante",
+                "Más decks y cards",
+                "Métricas avanzadas",
+                "XP y logros",
+                "Actividad reciente",
+                "Prioridad en nuevas funciones",
+              ]}
+              buttonLabel="Unirme a la lista de espera"
+            />
+            <PricingCard
+              title="Personalizado"
+              description="Para instituciones y equipos académicos."
+              price="A medida"
+              priceNote=""
+              features={[
+                "Docentes con gestión de materias",
+                "Creación de decks por curso",
+                "Seguimiento de avance por curso",
+                "Métricas generales de aprendizaje",
+                "Reportes para instituciones",
+                "Onboarding académico",
+              ]}
+              buttonLabel="Ver demo"
+            />
+          </div>
+          <p className="mx-auto mt-6 max-w-[720px] text-center text-sm leading-relaxed text-[#98A2B3]">
+            * En la demo revisamos las necesidades de tu institución, te orientamos
+            sobre el plan más adecuado y te mostramos cómo Kubo puede ayudar a
+            docentes y equipos académicos a acompañar el progreso de los
+            estudiantes. Sin compromiso.
+          </p>
+        </section>
+
+        <section
+          id="preguntas"
+          className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16"
+        >
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="text-3xl font-bold sm:text-4xl">
+              Preguntas frecuentes
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-[#98A2B3]">
+              Antes de agendar una demo, conocé cómo Kubo puede ayudar a tu
+              institución a acompañar mejor el estudio.
+            </p>
+          </div>
+          <div className="mx-auto mt-8 max-w-3xl rounded-[32px] border border-slate-200/70 bg-white p-5 shadow-[0_8px_32px_rgba(15,23,42,0.06)] sm:p-8">
+            {FAQ_ITEMS.map((item) => (
+              <FaqItem
+                key={item.question}
+                question={item.question}
+                answer={item.answer}
+              />
+            ))}
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center gap-8 rounded-3xl bg-[#EEF9D8] px-6 py-12 sm:flex-row sm:justify-between sm:px-12 sm:py-16">
             <span className="text-6xl" aria-hidden="true">
               🎓
@@ -319,9 +611,8 @@ export default function Home() {
                 Unite a estudiantes que ya están aprendiendo mejor con Kubo.
               </p>
             </div>
-            <div className="flex flex-col items-center gap-2">
-              <PrimaryButton>Empezar gratis</PrimaryButton>
-              <p className="text-sm text-[#98A2B3]">Prueba gratis</p>
+            <div className="flex flex-col items-center">
+              <PrimaryButton>Ver demo</PrimaryButton>
             </div>
           </div>
         </section>
@@ -329,7 +620,7 @@ export default function Home() {
 
       <footer className="border-t border-[#E5E7EB] py-10">
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 px-4 sm:px-6 lg:px-8">
-          <KuboLogo />
+          <span className="text-xl font-semibold text-[#111827]">Kubo</span>
           <div className="flex flex-col items-center gap-3 text-sm text-[#98A2B3] sm:flex-row sm:gap-6">
             <span>
               <span aria-hidden="true">❤️ </span>

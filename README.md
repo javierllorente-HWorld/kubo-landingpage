@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kubo Landing Page
 
-## Getting Started
+Landing page para **Kubo**, una plataforma de estudio pensada para ayudar a estudiantes, docentes e instituciones a organizar materias, crear decks y seguir el progreso de aprendizaje.
 
-First, run the development server:
+## Objetivo
+
+Presentar Kubo de forma clara y simple, mostrando:
+
+- qué problema resuelve;
+- cómo ayuda a estudiar con más constancia;
+- beneficios principales del producto;
+- planes disponibles;
+- preguntas frecuentes para instituciones.
+
+## Secciones
+
+La landing incluye:
+
+- Hero principal con propuesta de valor.
+- Universidades que usan Kubo.
+- Bloque de impacto y testimonios.
+- Beneficios del producto.
+- Cómo funciona Kubo.
+- Planes: Básico, Pro y Personalizado.
+- Preguntas frecuentes.
+- CTA final para ver demo.
+
+## Stack
+
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Vercel
+
+## Desarrollo local
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
