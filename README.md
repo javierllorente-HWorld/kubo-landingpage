@@ -2,6 +2,9 @@
 
 Landing page para **Kubo**, una plataforma de estudio pensada para ayudar a estudiantes, docentes e instituciones a organizar materias, crear decks y seguir el progreso de aprendizaje.
 
+<img width="1366" height="613" alt="image" src="https://github.com/user-attachments/assets/9a790986-ed95-4e36-98c8-586cb7ced190" />
+Imagen: donde se puede ver la introducción a la landing page.
+
 ## Objetivo
 
 Presentar Kubo de forma clara y simple, mostrando:
