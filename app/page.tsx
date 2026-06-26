@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ChatWidget from "./components/ChatWidget";
 
 const START_FREE_URL = "https://kubo-henna.vercel.app/";
 
@@ -302,7 +303,7 @@ export default function Home() {
       </header>
 
       <main>
-        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:items-center lg:gap-10 lg:px-8 lg:py-24">
+        <section className="mx-auto max-w-7xl px-4 pt-12 pb-16 sm:px-6 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:items-center lg:gap-10 lg:px-8 lg:pt-16 lg:pb-24">
           <div>
             <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
               Estudiá{" "}
@@ -359,37 +360,49 @@ export default function Home() {
         </section>
 
         <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-          <div className="rounded-[32px] border border-slate-200/70 bg-white p-5 shadow-[0_8px_32px_rgba(15,23,42,0.06)] sm:p-6">
-            <h3 className="text-center text-xl font-semibold text-[#111827] sm:text-2xl">
+          <div className="rounded-[32px] border border-slate-200/70 bg-white p-8 shadow-[0_8px_32px_rgba(15,23,42,0.06)] sm:p-10">
+            <h3 className="text-center text-2xl font-bold text-[#111827] sm:text-3xl">
               Impacto de Kubo
             </h3>
-            <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              <div className="rounded-xl border border-slate-200/60 bg-[#FAFBFC] px-3 py-3.5 text-center">
-                <p className="text-2xl font-bold text-[#111827]">+20k</p>
-                <p className="mt-0.5 text-xs text-[#98A2B3]">estudiantes</p>
-              </div>
-              <div className="rounded-xl border border-slate-200/60 bg-[#FAFBFC] px-3 py-3.5 text-center">
-                <p className="text-2xl font-bold text-[#111827]">93%</p>
-                <p className="mt-0.5 text-xs text-[#98A2B3]">
-                  mejora en la nota
+            <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-[0_1px_8px_rgba(15,23,42,0.07)]">
+                <p className="text-5xl font-extrabold leading-none tracking-tight text-[#1a1a1a]">
+                  <span className="text-[#c8f135]">+</span>20<span className="text-[#c8f135]">k</span>
+                </p>
+                <p className="mt-4 text-[11px] font-semibold uppercase tracking-widest text-[#98A2B3]">
+                  Estudiantes
                 </p>
               </div>
-              <div className="rounded-xl border border-slate-200/60 bg-[#FAFBFC] px-3 py-3.5 text-center">
-                <p className="text-2xl font-bold text-[#111827]">+1.2M</p>
-                <p className="mt-0.5 text-xs text-[#98A2B3]">cards estudiadas</p>
+              <div className="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-[0_1px_8px_rgba(15,23,42,0.07)]">
+                <p className="text-5xl font-extrabold leading-none tracking-tight text-[#1a1a1a]">
+                  93<span className="text-[#c8f135]">%</span>
+                </p>
+                <p className="mt-4 text-[11px] font-semibold uppercase tracking-widest text-[#98A2B3]">
+                  Mejora en la nota
+                </p>
               </div>
-              <div className="rounded-xl border border-slate-200/60 bg-[#FAFBFC] px-3 py-3.5 text-center">
-                <p className="text-2xl font-bold text-[#111827]">4.8/5</p>
-                <p className="mt-0.5 text-xs text-[#98A2B3]">
-                  satisfacción promedio
+              <div className="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-[0_1px_8px_rgba(15,23,42,0.07)]">
+                <p className="text-5xl font-extrabold leading-none tracking-tight text-[#1a1a1a]">
+                  <span className="text-[#c8f135]">+</span>1.2<span className="text-[#c8f135]">M</span>
+                </p>
+                <p className="mt-4 text-[11px] font-semibold uppercase tracking-widest text-[#98A2B3]">
+                  Cards estudiadas
+                </p>
+              </div>
+              <div className="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-[0_1px_8px_rgba(15,23,42,0.07)]">
+                <p className="text-5xl font-extrabold leading-none tracking-tight text-[#1a1a1a]">
+                  4.8<span className="text-[#c8f135]">/5</span>
+                </p>
+                <p className="mt-4 text-[11px] font-semibold uppercase tracking-widest text-[#98A2B3]">
+                  Satisfacción promedio
                 </p>
               </div>
             </div>
-            <p className="mt-5 text-center text-base text-[#98A2B3]">
+            <p className="mt-10 text-center text-sm text-[#98A2B3]">
               Lo que mejora tu forma de estudiar
             </p>
-            <div className="mt-5 grid gap-3 lg:grid-cols-2">
-              <div className="rounded-xl border border-slate-200/60 bg-[#FAFBFC] p-4">
+            <div className="mt-5 grid gap-4 lg:grid-cols-2">
+              <div className="rounded-xl border border-slate-200/60 bg-[#FAFBFC] p-5">
                 <p
                   className="text-sm tracking-wide text-[#FBBC04]"
                   aria-hidden="true"
@@ -404,7 +417,7 @@ export default function Home() {
                   Andrés · Estudiante
                 </p>
               </div>
-              <div className="rounded-xl border border-slate-200/60 bg-[#FAFBFC] p-4">
+              <div className="rounded-xl border border-slate-200/60 bg-[#FAFBFC] p-5">
                 <p
                   className="text-sm tracking-wide text-[#FBBC04]"
                   aria-hidden="true"
@@ -538,7 +551,7 @@ export default function Home() {
             <PricingCard
               title="Pro"
               description="Para estudiar con más seguimiento."
-              price="US$5"
+              price="US$15"
               priceNote="/ mes"
               features={[
                 "Todo lo del plan Estudiante",
@@ -643,6 +656,7 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      <ChatWidget />
     </div>
   );
 }
