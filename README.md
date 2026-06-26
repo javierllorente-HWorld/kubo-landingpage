@@ -26,6 +26,19 @@ Imagen: donde se puede ver la introducción a la landing page.
 - Separar la presentación comercial de la aplicación principal.
 - Practicar estructura, copy y navegación de una landing SaaS.
 
+## Versiones
+
+### v1.0
+Landing page original con hero, universidades, métricas, features, planes y FAQ.
+
+### v2.0 — Mejorada con Claude Code
+Cambios realizados con Claude Code:
+- Sección "Impacto de Kubo" rediseñada con cards individuales por métrica y mayor jerarquía visual
+- Precio del plan Pro actualizado a US$15/mes
+- Favicon actualizado al logo de Kubo
+- Título del sitio corregido de "Create Next App" a "Kubo"
+- Agente de chat integrado con OpenAI (gpt-3.5-turbo) para responder dudas de estudiantes sobre features, planes y precios
+
 ## Stack
 
 - Next.js
