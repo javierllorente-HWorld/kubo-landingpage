@@ -39,6 +39,10 @@ Cambios realizados con Claude Code:
 - Título del sitio corregido de "Create Next App" a "Kubo"
 - Agente de chat integrado con OpenAI (gpt-3.5-turbo) para responder dudas de estudiantes sobre features, planes y precios
 
+<img width="399" height="583" alt="image" src="https://github.com/user-attachments/assets/88ca1cfc-bb1a-4688-b985-a19fc647242a" />
+
+
+
 ## Stack
 
 - Next.js
